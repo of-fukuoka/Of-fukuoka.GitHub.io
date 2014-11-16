@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script src="js/init.js"></script>
+	<script src="js/draw_util.js"></script>
+	<script src="js/random_walker.js"></script>
+	<script>
+	window.addEventListener("load",function(e){
+		var ws = [];
+		for(var i = 0; i < 25; i++ ){
+			ws.push(new random_walks.Walker());
+		}
+
+
+		var animationFrame= window.requestAnimationFrame 
+		|| window.webkitRequestAnimationFrame
+     	|| window.mozRequestAnimationFrame
+     	|| window.setTimeout;
+
+     	function animationloop(){
+     		for(var w in ws){
+				for(var i = 0 ; i < 500 ; i++ ){
+					ws[w].display();
+					ws[w].step();
+				}
+			}
+
+			random_walks.ctx.font = "72pt 'Lucida Grande'";
+			random_walks.ctx.fillStyle = "#fff";
+			random_walks.ctx.fillText("OF Fukuoka", random_walks.width / 4, random_walks.height / 2, random_walks.width / 2);
+			animationFrame(animationloop, 1000 / 24);
+     	}
+
+
+     	animationloop();
+	});
+	</script>
+</body>
+</html>
+
